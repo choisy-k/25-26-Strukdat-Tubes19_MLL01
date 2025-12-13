@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1765539141 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\tubes19_mll01\produk_dll.cpp
+	<iostream>
+	"MainApp.h"
+
+1765583141 c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\tubes19_mll01\mainapp.h
+	<iostream>
+	"Supply_SLL.h"
+	"Relasi_SLL.h"
+	"Produk_DLL.h"
+
+1765516904 c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\tubes19_mll01\supply_sll.h
+	<iostream>
+	"Relasi_SLL.h"
+
+1765516457 c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\tubes19_mll01\relasi_sll.h
+	<iostream>
+	"Produk_DLL.h"
+
+1765516362 c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\tubes19_mll01\produk_dll.h
+	<iostream>
+
+1765582722 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\tubes19_mll01\main.cpp
+	<iostream>
+	"MainApp.h"
+
+1765582542 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\tubes19_mll01\supply_sll.cpp
+	<iostream>
+	"MainApp.h"
+
+1765582947 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\tubes19_mll01\relasi_sll.cpp
+	<iostream>
+	"MainApp.h"
+
