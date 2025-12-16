@@ -10,14 +10,12 @@ void createProdukList(ListProduk &L) {
 
 adrProduk allocateProduk(string nama, string kat, int harga, int moq) {
     adrProduk p = new elmProduk;
-
     p->infoP.namaProduk = nama;
     p->infoP.kategori = kat;
     p->infoP.harga = harga;
     p->infoP.moQ = moq;
     p->next = nullptr;
     p->prev = nullptr;
-
     return p;
 }
 
@@ -39,25 +37,22 @@ void insertProdukLast(ListProduk &L, adrProduk p) {
 
 adrProduk searchProduk(ListProduk L, string nama) {
     adrProduk p = L.first;
-    adrProduk findP = nullptr;
-
-    while(p!=nullptr && findP == nullptr) {
+    while(p != nullptr) {
         if(p->infoP.namaProduk == nama) {
-            findP = p;
+            return p;
         }
-        p= p->next;
+        p = p->next;
     }
-    return findP;
+    return nullptr;
 }
 
-void printInfotes(ListProduk L) {
+void printProdukInfo(ListProduk L) {
     adrProduk p = L.first;
     if(isEmptyProduk(L)) {
         cout << "Produk kosong." << endl;
     }
     else {
-        cout << "List produk: " << endl << endl;
-        while (p!=nullptr) {
+        while (p != nullptr) {
             cout << "Nama     : " << p->infoP.namaProduk << endl;
             cout << "Kategori : " << p->infoP.kategori << endl;
             cout << "Harga    : " << p->infoP.harga << endl;
@@ -68,4 +63,3 @@ void printInfotes(ListProduk L) {
     }
     cout << endl;
 }
-
