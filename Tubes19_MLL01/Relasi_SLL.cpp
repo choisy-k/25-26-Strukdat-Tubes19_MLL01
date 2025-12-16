@@ -10,120 +10,99 @@ void connectSuptoProd(adrSupplier s, adrProduk p){
     else {
         adrRelasi r = new elmRelasi;
         r->next = nullptr;
-        r->toProduk = nullptr;
+        r->toProduk = p;
 
         if(s->firstRelasi == nullptr) {
             s->firstRelasi = r;
-            r->toProduk = p;
         }
         else {
-            r->next = s->firstRelasi; //insertfirst
+            r->next = s->firstRelasi; // insert first
             s->firstRelasi = r;
-            r->toProduk = p;
         }
         cout << "\nSuccess!\n Produk " << p->infoP.namaProduk << " sudah ditambahkan ke Supplier " << s->infoS.namaSupplier << "." << endl;
-
     }
 }
 
 adrRelasi findRelation(adrSupplier s, adrProduk p){
-        //temukan relasi
     adrRelasi r = s->firstRelasi;
-    adrRelasi findR = nullptr;
-    while(r != nullptr && findR == nullptr) {
+    while(r != nullptr) {
         if(r->toProduk == p) {
-            findR = r;
+            return r;
         }
         r = r->next;
     }
-    return findR;
+    return nullptr;
 }
 
 void deleteProdukfromSupplier(adrSupplier s, adrProduk p){
-    adrRelasi r = findRelation(s, p);
+    if(s == nullptr || p == nullptr) {
+        cout << "Error! Data tidak valid." << endl;
+        return;
+    }
 
-    //hapus relasi
+    adrRelasi r = findRelation(s, p);
     if(r == nullptr) {
         cout << "Supplier tidak menyediakan produk ini." << endl;
+        return;
     }
-    else {
-        if(r == s->firstRelasi) {
-            deleteFirstRelation(s, r); //sever the relation connection first later
-        }
-        else if(r->next == nullptr) {
-            deleteLastRelation(s, r);
-        }
-        else {
-            deleteMiddleRelation(s, r, p);
-        }
-    }
-}
-void deleteFirstRelation(adrSupplier s, adrRelasi r) {
-    if(r->next == nullptr) {
-        r->toProduk = nullptr;
-        s->firstRelasi = nullptr;
-    }
-    else {
-        r->toProduk = nullptr;
-        s->firstRelasi = r->next;
-        r->next = nullptr;
-    }
-}
-void deleteLastRelation(adrSupplier s, adrRelasi r) {
-    adrRelasi last;
-    r = s->firstRelasi;
 
-    if(r->next == nullptr) {
-        r->toProduk = nullptr;
-        s->firstRelasi = nullptr;
+    // Hapus relasi dari list
+    if(r == s->firstRelasi) {
+        s->firstRelasi = r->next;
+    } else {
+        adrRelasi prev = s->firstRelasi;
+        while(prev != nullptr && prev->next != r) {
+            prev = prev->next;
+        }
+        if(prev != nullptr) {
+            prev->next = r->next;
+        }
     }
-    else {
-        while(r->next != nullptr) {
-            last = r;
+
+    delete r; // Free memory
+    cout << "Produk berhasil dihapus dari supplier." << endl;
+}
+
+adrSupplier findTopSupplier(ListSupplier L) {
+    adrSupplier top = nullptr;
+    int maxProducts = 0;
+
+    adrSupplier s = L.first;
+    while(s != nullptr) {
+        int count = 0;
+        adrRelasi r = s->firstRelasi;
+        while(r != nullptr) {
+            count++;
             r = r->next;
         }
-        r->toProduk = nullptr;
-        last->next = nullptr;
-    }
-}
-void deleteMiddleRelation(adrSupplier s, adrRelasi r, adrProduk p) {
-    adrRelasi before;
-    adrRelasi findR = s->firstRelasi;
 
-    while(findR != nullptr && findR->toProduk != p) {
-        before = findR;
-        findR = findR->next;
+        if(count > maxProducts) {
+            maxProducts = count;
+            top = s;
+        }
+        s = s->next;
     }
-    if(before->next->next == nullptr) {
-        r->toProduk = nullptr;
-        r = before->next;
-        before->next = nullptr;
+
+    return top;
+}
+
+int countProductsBySupplier(adrSupplier s) {
+    int count = 0;
+    adrRelasi r = s->firstRelasi;
+    while(r != nullptr) {
+        count++;
+        r = r->next;
     }
-    else {
-        r->toProduk = nullptr;
-        r = before->next;
-        before->next = r->next;
-        r->next = nullptr;
-    }
+    return count;
 }
 
 void showAllData(ListSupplier L) {
-
-    /*cara display produk?
-    ------- DAFTAR SUPPLIER -------
-    Supplier: Nama [Lokasi]
-    Produk yang disediakan:
-    [nama produk] - [harga] - [minimum order quantity]
-    Kategori:
-    1. Nama - Harga - MOQ
-    2. ....
-    Kategori:
-    1. ...
-
-    Total produk: ???
-    */
-
     adrSupplier s = L.first;
+
+    if(s == nullptr) {
+        cout << "Tidak ada supplier." << endl;
+        return;
+    }
 
     cout << "\n------- DAFTAR SUPPLIER -------" << endl << endl;
     while(s != nullptr) {
@@ -131,14 +110,21 @@ void showAllData(ListSupplier L) {
 
         cout << "Supplier: " << s->infoS.namaSupplier << " [" << s->infoS.lokasi << "]" << endl;
         cout << "Produk yang disediakan: " << endl;
-//        adrRelasi r = findRelation(s,p);
+
         adrRelasi r = s->firstRelasi;
-        while(r != nullptr) {
-            counter++;
-            cout << r->toProduk->infoP.namaProduk << ", ";
-            r = r->next;
+        if(r == nullptr) {
+            cout << "  (Tidak ada produk)" << endl;
+        } else {
+            while(r != nullptr) {
+                counter++;
+                cout << "  " << counter << ". " << r->toProduk->infoP.namaProduk
+                     << " | Kategori: " << r->toProduk->infoP.kategori
+                     << " | Harga: Rp" << r->toProduk->infoP.harga
+                     << " | MOQ: " << r->toProduk->infoP.moQ << endl;
+                r = r->next;
+            }
         }
+        cout << "Total produk: " << counter << endl << endl;
         s = s->next;
-        cout << "\nTotal produk: " << counter << endl << endl;
     }
 }

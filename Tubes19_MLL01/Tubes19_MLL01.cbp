@@ -33,6 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="MainApp.h" />
+		<Unit filename="MainConsole.cpp" />
 		<Unit filename="Produk_DLL.cpp" />
 		<Unit filename="Produk_DLL.h" />
 		<Unit filename="Relasi_SLL.cpp" />

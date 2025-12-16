@@ -13,12 +13,10 @@ bool isEmptySupplier(ListSupplier L) {
 
 adrSupplier allocateSupplier(string nama, string lokasi) {
     adrSupplier p = new elmSupplier;
-
     p->infoS.namaSupplier = nama;
     p->infoS.lokasi = lokasi;
     p->next = nullptr;
     p->firstRelasi = nullptr;
-
     return p;
 }
 
@@ -27,109 +25,61 @@ void insertSupplierFirst(ListSupplier &L, adrSupplier p) {
     L.first = p;
 }
 
-void deleteFirst(ListSupplier &L, adrSupplier p) {
-    if(isEmptySupplier(L)){
-        p = nullptr;
-    }
-    else if(p->next == nullptr) {
-        L.first = nullptr;
-    }
-    else {
-        L.first = p->next;
-        p->next = nullptr;
-    }
-}
-void deleteLast(ListSupplier &L, adrSupplier p) {
-    adrSupplier last;
-    p = L.first;
-    if(isEmptySupplier(L)) {
-        p = nullptr;
-    }
-    else if(p->next == nullptr) {
-        L.first = nullptr;
-    }
-    else {
-        while(p->next != nullptr) {
-            last = p;
-            p = p->next;
+adrSupplier searchSupplier(ListSupplier L, string nama) {
+    adrSupplier p = L.first;
+    while(p != nullptr) {
+        if(p->infoS.namaSupplier == nama) {
+            return p;
         }
-        last->next = nullptr;
+        p = p->next;
     }
-}
-void deleteMiddle(ListSupplier &L, adrSupplier p) {
-    adrSupplier before;
-    adrSupplier findP = L.first;
-    while(findP != nullptr && findP->infoS.namaSupplier != p->infoS.namaSupplier) {
-        before = findP;
-        findP = findP->next;
-    }
-    if(before->next->next == nullptr) {
-        p = before->next;
-        before->next = nullptr;
-    }
-    else {
-        p = before->next;
-        before->next = p->next;
-        p->next = nullptr;
-    }
+    return nullptr;
 }
 
 void deleteSupplier(ListSupplier &L, adrSupplier p) {
     if(isEmptySupplier(L)) {
         cout << "List Supplier kosong." << endl;
+        return;
     }
-    else if(p == nullptr) {
+    if(p == nullptr) {
         cout << "Supplier tidak ditemukan." << endl;
+        return;
     }
-    else {
-        //hapus semua relasi dari Supplier p
-        adrRelasi r = p->firstRelasi;
-        while(r != nullptr) {
-            r->toProduk = nullptr;
-            r = r->next;
-        }
-        p->firstRelasi = nullptr;
 
-        if(p == L.first) {
-            deleteFirst(L, p); //sever the relation connection first later
-        }
-        else if(p->next == nullptr) {
-            deleteLast(L, p);
-        }
-        else {
-            deleteMiddle(L, p);
-        }
-        cout << "Success! Supplier telah dihapus." << endl;
+    // Hapus semua relasi dari Supplier p
+    adrRelasi r = p->firstRelasi;
+    while(r != nullptr) {
+        adrRelasi temp = r;
+        r = r->next;
+        delete temp; // Free memory relasi
     }
+    p->firstRelasi = nullptr;
+
+    // Hapus supplier dari list
+    if(p == L.first) {
+        L.first = p->next;
+    } else {
+        adrSupplier prev = L.first;
+        while(prev != nullptr && prev->next != p) {
+            prev = prev->next;
+        }
+        if(prev != nullptr) {
+            prev->next = p->next;
+        }
+    }
+
+    delete p; // Free memory supplier
+    cout << "Success! Supplier telah dihapus." << endl;
 }
 
-adrSupplier searchSupplier(ListSupplier L, string nama) {
-    adrSupplier p = L.first;
-    adrSupplier findP = nullptr;
-
-    while(p!=nullptr && findP == nullptr) {
-        if(p->infoS.namaSupplier == nama) {
-            findP = p;
-        }
-        p= p->next;
-    }
-    return findP;
-}
-
-adrSupplier findTopSupplier();
-
-
-
-
-
-void printInfotess(ListSupplier L) {
+void printSupplierInfo(ListSupplier L) {
     adrSupplier p = L.first;
     if(isEmptySupplier(L)) {
         cout << "Supplier kosong." << endl;
     }
     else {
         cout << "List Supplier: " << endl << endl;
-        while (p!=nullptr) {
+        while (p != nullptr) {
             cout << "Nama   : " << p->infoS.namaSupplier << endl;
             cout << "Lokasi : " << p->infoS.lokasi << endl;
             cout << endl;
@@ -138,3 +88,5 @@ void printInfotess(ListSupplier L) {
     }
     cout << endl;
 }
+
+
