@@ -69,7 +69,28 @@ void deleteSupplier(ListSupplier &L, adrSupplier p) {
     }
 
     delete p; // Free memory supplier
-    cout << "Success! Supplier telah dihapus." << endl;
+    cout << "[SUCCESS] Supplier telah dihapus." << endl;
+}
+adrSupplier findTopSupplier(ListSupplier L) {
+    adrSupplier top = nullptr;
+    int maxProduk = 0;
+
+    adrSupplier s = L.first;
+    while(s != nullptr) {
+        int count = 0;
+        adrRelasi r = s->firstRelasi;
+        while(r != nullptr) {
+            count++;
+            r = r->next;
+        }
+
+        if(count > maxProduk) {
+            maxProduk = count;
+            top = s;
+        }
+        s = s->next;
+    }
+    return top;
 }
 
 void printSupplierInfo(ListSupplier L) {
