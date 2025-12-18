@@ -1,27 +1,7 @@
 #include <iostream>
-#include <limits>
 #include "MainApp.h"
 
 using namespace std;
-
-void displayMenu() {
-    cout << "\n==================================================";
-    cout << "\n======= SISTEM MANAJEMEN SUPPLIER & PRODUK =======\n";
-    cout << "==================================================\n";
-    cout << "1. Tambah Supplier\n";
-    cout << "2. Tambah Produk\n";
-    cout << "3. Cari Supplier\n";
-    cout << "4. Cari Produk\n";
-    cout << "5. Tambah Produk ke Supplier\n";
-    cout << "6. Tampilkan List Supplier\n";
-    cout << "7. Tampilkan List Produk\n";
-    cout << "8. Tampilkan Data (Supplier + Produk)\n";
-    cout << "9. Hapus Supplier\n";
-    cout << "10. Hapus Produk dari Supplier\n";
-    cout << "11. Tampilkan Supplier dengan Produk Terbanyak\n";
-    cout << "0. Keluar\n";
-    cout << "Pilihan: ";
-}
 
 int main() {
     ListProduk LP;
@@ -44,58 +24,102 @@ int main() {
     insertSupplierFirst(LS, sp);
     sp = allocateSupplier("Bach", "Dayeuhkolot");
     insertSupplierFirst(LS, sp);
+    sp = allocateSupplier("Connie", "Baleendah");
+    insertSupplierFirst(LS, sp);
+    sp = allocateSupplier("Donny", "Cimahi");
+    insertSupplierFirst(LS, sp);
+
+    adrSupplier as = searchSupplier(LS, "Ash");
+    adrSupplier dn = searchSupplier(LS, "Donny");
+    adrSupplier cm = searchSupplier(LS, "Connie");
+    adrProduk dr = searchProduk(LP, "Durian");
+    adrProduk mg = searchProduk(LP, "Mangga");
+    adrProduk by = searchProduk(LP, "Bayam");
+
+    // Ash - Durian mangga bayam
+    connectSuptoProd(as, dr);
+    connectSuptoProd(as, mg);
+    connectSuptoProd(as, by);
+
+    // Donny - mangga, bayam
+    connectSuptoProd(dn, mg);
+    connectSuptoProd(dn, by);
+
 
     int pilihan;
-    do {
-        displayMenu();
-        pilihan = filterInput();
-        clearInputBuffer();
 
-        switch(pilihan) {
-            case 1:
-                tambahSupplier(LS);
-                break;
-            case 2:
-                tambahProduk(LP);
-                break;
-            case 3:
-                cariSupplier(LS);
-                break;
-            case 4:
-                cariProduk(LP);
-                break;
-            case 5:
-                hubungkanSupplierProduk(LS, LP);
-                break;
-            case 6:
-                cout << "\n--- Daftar Supplier ---\n";
-                printSupplierInfo(LS);
-                break;
-            case 7:
-                cout << "\n--- Daftar Produk ---\n";
-                printProdukInfo(LP);
-                break;
-            case 8:
-                showAllData(LS);
-                break;
-            case 9:
-                hapusSupplier(LS);
-                break;
-            case 10:
-                hapusProdukDariSupplier(LS, LP);
-                break;
-            case 11:
-                tampilkanSupplierTerbanyak(LS);
-                break;
-            case 0:
-                cout << "\nTerima kasih telah menggunakan program kami!\n";
-                break;
-            default:
-                cout << "\nPilihan tidak valid!\n";
+    do {
+        cout << "\n==================================================";
+        cout << "\n======= SISTEM MANAJEMEN SUPPLIER & PRODUK =======\n";
+        cout << "==================================================\n";
+        cout << "1. Tambah Supplier\n";
+        cout << "2. Tambah Produk\n";
+        cout << "3. Cari Supplier\n";
+        cout << "4. Tambah Produk ke Supplier\n";
+        cout << "5. Tampilkan Daftar Supplier\n";
+        cout << "6. Hapus Supplier\n";
+        cout << "7. Hapus Produk dari Supplier\n";
+        cout << "8. Tampilkan Supplier dengan Produk Terbanyak\n";
+        cout << "0. Keluar\n";
+
+        bool validInput = false;
+
+        // mencegah menu muncul sampai user memasukkan input valid
+        while(!validInput) {
+            cout << "\nPilihan: ";
+            cin >> pilihan;
+
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "Pilihan harus berupa angka." << endl;
+            }
+            else {
+                if(pilihan >= 0 && pilihan <= 8) {
+                    validInput = true;
+                }
+                else {
+                    cout << "[ERROR] Masukkan angka antara 0-8." << endl;
+                }
+            }
         }
 
-        cout << "\nTekan Enter untuk melanjutkan...";
-        clearInputBuffer();
+        switch(pilihan) {
+        case 1:
+            tambahSupplier(LS);
+            break;
+        case 2:
+            tambahProduk(LP);
+            break;
+        case 3:
+            cariSupplier(LS);
+            break;
+        case 4:
+            hubungkanSupplierProduk(LS, LP);
+            break;
+        case 5:
+            showAllData(LS);
+            break;
+        case 6:
+            hapusSupplier(LS);
+            break;
+        case 7:
+            hapusProdukDariSupplier(LS, LP);
+            break;
+        case 8:
+            tampilkanSupplierTerbanyak(LS);
+            break;
+        case 0:
+            cout << "\nTerima kasih atas waktu Anda.\nMenutup program...\n";
+            break;
+        default:
+            cout << "[ERROR] Pilihan tidak valid.\n";
+        }
+
+        // mencegah menu muncul sampai user menekan Enter.
+        cout << "\nTekan Enter untuk melanjutkan.";
+        cin.get();
+        cin.ignore(10000, '\n');
 
     } while(pilihan != 0);
 

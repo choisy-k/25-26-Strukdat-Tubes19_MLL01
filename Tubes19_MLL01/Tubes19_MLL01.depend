@@ -69,7 +69,7 @@
 	<iostream>
 	"MainApp.h"
 
-1765880929 c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\mainapp.h
+1766015207 c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\mainapp.h
 	<iostream>
 	"Supply_SLL.h"
 	"Relasi_SLL.h"
@@ -86,21 +86,19 @@
 1765767843 c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\produk_dll.h
 	<iostream>
 
-1765767843 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\relasi_sll.cpp
+1766016154 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\relasi_sll.cpp
 	<iostream>
 	"MainApp.h"
 
-1765767843 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\supply_sll.cpp
+1766015656 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\supply_sll.cpp
 	<iostream>
 	"MainApp.h"
 
-1765879898 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\main.cpp
+1766016021 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\main.cpp
 	<iostream>
-	<limits>
 	"MainApp.h"
 
-1765880453 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\mainconsole.cpp
+1765981194 source:c:\users\chokh\onedrive - telkom university\if 48 01 struktur data\25-26-strukdat-tubes19_mll01\tubes19_mll01\mainconsole.cpp
 	<iostream>
-	<limits>
 	"MainApp.h"
 

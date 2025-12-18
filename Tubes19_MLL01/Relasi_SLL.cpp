@@ -5,7 +5,7 @@ using namespace std;
 
 void connectSuptoProd(adrSupplier s, adrProduk p){
     if(s == nullptr || p == nullptr) {
-        cout << "Error! Salah satu atau kedua data tidak ditemukan di list." << endl;
+        cout << "[ERROR] Salah satu atau kedua data tidak ditemukan di list." << endl;
     }
     else {
         adrRelasi r = new elmRelasi;
@@ -16,10 +16,11 @@ void connectSuptoProd(adrSupplier s, adrProduk p){
             s->firstRelasi = r;
         }
         else {
-            r->next = s->firstRelasi; // insert first
+            //insertFirst
+            r->next = s->firstRelasi;
             s->firstRelasi = r;
         }
-        cout << "\nSuccess!\n Produk " << p->infoP.namaProduk << " sudah ditambahkan ke Supplier " << s->infoS.namaSupplier << "." << endl;
+        cout << "\n[SUCCESS] Produk " << p->infoP.namaProduk << " ditambahkan ke Supplier " << s->infoS.namaSupplier << "." << endl;
     }
 }
 
@@ -36,13 +37,13 @@ adrRelasi findRelation(adrSupplier s, adrProduk p){
 
 void deleteProdukfromSupplier(adrSupplier s, adrProduk p){
     if(s == nullptr || p == nullptr) {
-        cout << "Error! Data tidak valid." << endl;
+        cout << "[ERROR] Data tidak valid." << endl;
         return;
     }
 
     adrRelasi r = findRelation(s, p);
     if(r == nullptr) {
-        cout << "Supplier tidak menyediakan produk ini." << endl;
+        cout << "[ERROR] Supplier tidak menyediakan produk ini." << endl;
         return;
     }
 
@@ -63,29 +64,6 @@ void deleteProdukfromSupplier(adrSupplier s, adrProduk p){
     cout << "Produk berhasil dihapus dari supplier." << endl;
 }
 
-adrSupplier findTopSupplier(ListSupplier L) {
-    adrSupplier top = nullptr;
-    int maxProducts = 0;
-
-    adrSupplier s = L.first;
-    while(s != nullptr) {
-        int count = 0;
-        adrRelasi r = s->firstRelasi;
-        while(r != nullptr) {
-            count++;
-            r = r->next;
-        }
-
-        if(count > maxProducts) {
-            maxProducts = count;
-            top = s;
-        }
-        s = s->next;
-    }
-
-    return top;
-}
-
 int countProductsBySupplier(adrSupplier s) {
     int count = 0;
     adrRelasi r = s->firstRelasi;
@@ -100,7 +78,7 @@ void showAllData(ListSupplier L) {
     adrSupplier s = L.first;
 
     if(s == nullptr) {
-        cout << "Tidak ada supplier." << endl;
+        cout << "[ERROR] Tidak ada supplier." << endl;
         return;
     }
 
