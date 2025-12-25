@@ -39,36 +39,36 @@ adrSupplier searchSupplier(ListSupplier L, string nama) {
 void deleteSupplier(ListSupplier &L, adrSupplier p) {
     if(isEmptySupplier(L)) {
         cout << "List Supplier kosong." << endl;
-        return;
     }
-    if(p == nullptr) {
+    else if(p == nullptr) {
         cout << "Supplier tidak ditemukan." << endl;
-        return;
     }
-
-    // Hapus semua relasi dari Supplier p
-    adrRelasi r = p->firstRelasi;
-    while(r != nullptr) {
-        adrRelasi temp = r;
-        r = r->next;
-        delete temp; // Free memory relasi
-    }
-    p->firstRelasi = nullptr;
-
-    // Hapus supplier dari list
-    if(p == L.first) {
-        L.first = p->next;
-    } else {
-        adrSupplier prev = L.first;
-        while(prev != nullptr && prev->next != p) {
-            prev = prev->next;
+    else {
+        //delete relasi
+        adrRelasi r = p->firstRelasi;
+        while (r != nullptr) {
+            adrRelasi bfore = r;
+            r = r->next;
+            bfore->next = nullptr;
         }
-        if(prev != nullptr) {
-            prev->next = p->next;
+        p->firstRelasi = nullptr;
+
+        //delete supplier
+        if(p == L.first) {
+            L.first = p->next;
+            p->next = nullptr;
+        }
+        else {
+            adrSupplier prev = L.first;
+            while(prev != nullptr && prev->next != p) {
+                prev = prev->next;
+            }
+            if(prev != nullptr) {
+                prev->next = p->next;
+                p->next = nullptr;
+            }
         }
     }
-
-    delete p; // Free memory supplier
     cout << "[SUCCESS] Supplier telah dihapus." << endl;
 }
 adrSupplier findTopSupplier(ListSupplier L) {

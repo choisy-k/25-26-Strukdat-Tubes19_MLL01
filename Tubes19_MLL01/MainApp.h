@@ -13,9 +13,9 @@ void tambahSupplier(ListSupplier &LS);
 /*I.S. Terdefinisi list supplier LS
 F.S. Data supplier dimasukkan ke prosedur insertSupplier() jika belum ada di list*/
 
-void tambahProduk(ListProduk &LP);
-/*I.S. Terdefinisi list produk LP
-F.S. Data produk dimasukkan ke prosedur insertProdukLast() jika belum ada di list*/
+void tambahProduk(ListProduk &LP, ListSupplier &LS);
+/*I.S. Terdefinisi list produk LP dan list supplier LS
+F.S. Data produk dimasukkan ke prosedur insertProdukLast() jika belum ada di list dan dihubungkan dengan satu supplier*/
 
 void cariSupplier(ListSupplier &LS);
 /*I.S. Terdefinisi list supplier LS
@@ -36,6 +36,10 @@ F.S. Menunjukkan pesan konfirmasi apakah produk sudah dihapus dari supplier, ata
 void tampilkanSupplierTerbanyak(ListSupplier &LS);
 /*I.S. Terdefinisi list supplier LS
 F.S. Menunjukkan data supplier dengan produk terbanyak, beserta nama produk-produknya*/
+
+string toUpper(string input);
+/*I.S. Terdefinisi user input dalam bentuk string
+F.S. Semua alfabet di user input menjadi UPPERCASE (huruf kapital)*/
 
 
 

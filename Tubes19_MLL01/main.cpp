@@ -12,29 +12,29 @@ int main() {
 
     // Data sample untuk testing
     adrProduk pr;
-    pr = allocateProduk("Durian", "Buah", 20000, 10);
+    pr = allocateProduk("DURIAN", "Buah", 20000, 10);
     insertProdukLast(LP, pr);
-    pr = allocateProduk("Mangga", "Buah", 12000, 25);
+    pr = allocateProduk("MANGGA", "Buah", 12000, 25);
     insertProdukLast(LP, pr);
-    pr = allocateProduk("Bayam", "Sayur", 11000, 10);
+    pr = allocateProduk("BAYAM", "Sayur", 11000, 10);
     insertProdukLast(LP, pr);
 
     adrSupplier sp;
-    sp = allocateSupplier("Ash", "Bojongsoang");
+    sp = allocateSupplier("ASH", "Bojongsoang");
     insertSupplierFirst(LS, sp);
-    sp = allocateSupplier("Bach", "Dayeuhkolot");
+    sp = allocateSupplier("BACH", "Dayeuhkolot");
     insertSupplierFirst(LS, sp);
-    sp = allocateSupplier("Connie", "Baleendah");
+    sp = allocateSupplier("CONNIE", "Baleendah");
     insertSupplierFirst(LS, sp);
-    sp = allocateSupplier("Donny", "Cimahi");
+    sp = allocateSupplier("DONNY", "Cimahi");
     insertSupplierFirst(LS, sp);
 
-    adrSupplier as = searchSupplier(LS, "Ash");
-    adrSupplier dn = searchSupplier(LS, "Donny");
-    adrSupplier cm = searchSupplier(LS, "Connie");
-    adrProduk dr = searchProduk(LP, "Durian");
-    adrProduk mg = searchProduk(LP, "Mangga");
-    adrProduk by = searchProduk(LP, "Bayam");
+    adrSupplier as = searchSupplier(LS, "ASH");
+    adrSupplier dn = searchSupplier(LS, "DONNY");
+    adrSupplier cm = searchSupplier(LS, "CONNIE");
+    adrProduk dr = searchProduk(LP, "DURIAN");
+    adrProduk mg = searchProduk(LP, "MANGGA");
+    adrProduk by = searchProduk(LP, "BAYAM");
 
     // Ash - Durian mangga bayam
     connectSuptoProd(as, dr);
@@ -56,7 +56,7 @@ int main() {
         cout << "2. Tambah Produk\n";
         cout << "3. Cari Supplier\n";
         cout << "4. Tambah Produk ke Supplier\n";
-        cout << "5. Tampilkan Daftar Supplier\n";
+        cout << "5. Daftar Supplier\n";
         cout << "6. Hapus Supplier\n";
         cout << "7. Hapus Produk dari Supplier\n";
         cout << "8. Tampilkan Supplier dengan Produk Terbanyak\n";
@@ -89,7 +89,7 @@ int main() {
             tambahSupplier(LS);
             break;
         case 2:
-            tambahProduk(LP);
+            tambahProduk(LP, LS);
             break;
         case 3:
             cariSupplier(LS);

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "MainApp.h"
 
 using namespace std;
@@ -38,40 +39,40 @@ adrRelasi findRelation(adrSupplier s, adrProduk p){
 void deleteProdukfromSupplier(adrSupplier s, adrProduk p){
     if(s == nullptr || p == nullptr) {
         cout << "[ERROR] Data tidak valid." << endl;
-        return;
     }
-
-    adrRelasi r = findRelation(s, p);
-    if(r == nullptr) {
-        cout << "[ERROR] Supplier tidak menyediakan produk ini." << endl;
-        return;
-    }
-
-    // Hapus relasi dari list
-    if(r == s->firstRelasi) {
-        s->firstRelasi = r->next;
-    } else {
-        adrRelasi prev = s->firstRelasi;
-        while(prev != nullptr && prev->next != r) {
-            prev = prev->next;
+    else {
+        adrRelasi r = findRelation(s, p);
+        if(r == nullptr) {
+            cout << "[ERROR] Supplier tidak menyediakan produk ini." << endl;
         }
-        if(prev != nullptr) {
-            prev->next = r->next;
+        else {
+            if(r == s->firstRelasi) {
+                s->firstRelasi = r->next;
+                r->next = nullptr;
+            }
+            else {
+                adrRelasi prev = s->firstRelasi;
+                while(prev != nullptr && prev->next != r) {
+                    prev = prev->next;
+                }
+                if(prev != nullptr) {
+                    prev->next = r->next;
+                    r->next = nullptr;
+                }
+            }
         }
     }
-
-    delete r; // Free memory
     cout << "Produk berhasil dihapus dari supplier." << endl;
 }
 
 int countProductsBySupplier(adrSupplier s) {
-    int count = 0;
+    int countP = 0;
     adrRelasi r = s->firstRelasi;
     while(r != nullptr) {
-        count++;
+        countP++;
         r = r->next;
     }
-    return count;
+    return countP;
 }
 
 void showAllData(ListSupplier L) {
@@ -86,7 +87,8 @@ void showAllData(ListSupplier L) {
     while(s != nullptr) {
         int counter = 0;
 
-        cout << "Supplier: " << s->infoS.namaSupplier << " [" << s->infoS.lokasi << "]" << endl;
+        cout << "Supplier: " << s->infoS.namaSupplier
+             << " [" << s->infoS.lokasi << "]" << endl;
         cout << "Produk yang disediakan: " << endl;
 
         adrRelasi r = s->firstRelasi;
@@ -95,9 +97,24 @@ void showAllData(ListSupplier L) {
         } else {
             while(r != nullptr) {
                 counter++;
-                cout << "  " << counter << ". " << r->toProduk->infoP.namaProduk
-                     << " | Kategori: " << r->toProduk->infoP.kategori
-                     << " | Harga: Rp" << r->toProduk->infoP.harga
+                // manual padding with .length()
+                string namaP = r->toProduk->infoP.namaProduk;
+                string kat = r->toProduk->infoP.kategori;
+                string harga = "Rp " + to_string(r->toProduk->infoP.harga);
+
+                while(namaP.length() < 15) {
+                    namaP += " ";
+                }
+                while (kat.length() < 10) {
+                    kat += " ";
+                }
+                while(harga.length() < 7) {
+                    harga += " ";
+                }
+
+                cout << "  " << counter << ". " << namaP
+                     << " | " << kat
+                     << " | " << harga
                      << " | MOQ: " << r->toProduk->infoP.moQ << endl;
                 r = r->next;
             }
