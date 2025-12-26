@@ -52,14 +52,15 @@ void printProdukInfo(ListProduk L) {
         cout << "Produk kosong." << endl;
     }
     else {
+        int counter = 0;
+        cout << "------- DAFTAR PRODUK -------" << endl;
         while (p != nullptr) {
-            cout << "Nama     : " << p->infoP.namaProduk << endl;
-            cout << "Kategori : " << p->infoP.kategori << endl;
-            cout << "Harga    : " << p->infoP.harga << endl;
-            cout << "MOQ      : " << p->infoP.moQ << endl;
-            cout << endl;
+            counter++;
+            cout << counter << ". " << p->infoP.namaProduk
+                 << " - " << p->infoP.kategori
+                 << " - Rp" << p->infoP.harga
+                 << " - MOQ: " << p->infoP.moQ << endl;
             p = p->next;
         }
     }
-    cout << endl;
 }

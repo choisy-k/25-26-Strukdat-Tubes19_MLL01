@@ -3,13 +3,7 @@
 
 using namespace std;
 
-int main() {
-    ListProduk LP;
-    ListSupplier LS;
-
-    createProdukList(LP);
-    createSupplierList(LS);
-
+void dummyData(ListProduk &LP, ListSupplier &LS) {
     // Data sample untuk testing
     adrProduk pr;
     pr = allocateProduk("DURIAN", "Buah", 20000, 10);
@@ -44,7 +38,17 @@ int main() {
     // Donny - mangga, bayam
     connectSuptoProd(dn, mg);
     connectSuptoProd(dn, by);
+}
 
+int main() {
+    ListProduk LP;
+    ListSupplier LS;
+
+    createProdukList(LP);
+    createSupplierList(LS);
+
+    dummyData(LP, LS);
+    cout << "\nDUMMY DATA SUCCESSFULLY INSERTED.\n" << endl;
 
     int pilihan;
 
@@ -52,14 +56,19 @@ int main() {
         cout << "\n==================================================";
         cout << "\n======= SISTEM MANAJEMEN SUPPLIER & PRODUK =======\n";
         cout << "==================================================\n";
+        cout << "\n=========SUPPLIER=========\n";
         cout << "1. Tambah Supplier\n";
-        cout << "2. Tambah Produk\n";
-        cout << "3. Cari Supplier\n";
-        cout << "4. Tambah Produk ke Supplier\n";
-        cout << "5. Daftar Supplier\n";
-        cout << "6. Hapus Supplier\n";
-        cout << "7. Hapus Produk dari Supplier\n";
-        cout << "8. Tampilkan Supplier dengan Produk Terbanyak\n";
+        cout << "2. Cari Supplier\n";
+        cout << "3. Daftar Supplier & Produk (terpisah)\n";
+        cout << "4. Supplier dengan Produk Terbanyak\n";
+        cout << "5. Hapus Supplier\n";
+
+        cout << "\n==========PRODUK==========\n";
+        cout << "6. Tambah Produk\n";
+        cout << "7. Tambah Produk ke Supplier\n";
+        cout << "8. Daftar Produk per Supplier\n";
+        cout << "9. Hapus Produk dari Supplier\n\n";
+
         cout << "0. Keluar\n";
 
         bool validInput = false;
@@ -75,7 +84,7 @@ int main() {
                 cout << "Pilihan harus berupa angka." << endl;
             }
             else {
-                if(pilihan >= 0 && pilihan <= 8) {
+                if(pilihan >= 0 && pilihan <= 9) {
                     validInput = true;
                 }
                 else {
@@ -89,25 +98,30 @@ int main() {
             tambahSupplier(LS);
             break;
         case 2:
-            tambahProduk(LP, LS);
-            break;
-        case 3:
             cariSupplier(LS);
             break;
+        case 3:
+            cout << endl;
+            printSupplierInfo(LS);
+            printProdukInfo(LP);
+            break;
         case 4:
-            hubungkanSupplierProduk(LS, LP);
+            tampilkanSupplierTerbanyak(LS);
             break;
         case 5:
-            showAllData(LS);
-            break;
-        case 6:
             hapusSupplier(LS);
             break;
+        case 6:
+            tambahProduk(LP, LS);
+            break;
         case 7:
-            hapusProdukDariSupplier(LS, LP);
+            hubungkanSupplierProduk(LS, LP);
             break;
         case 8:
-            tampilkanSupplierTerbanyak(LS);
+            showAllData(LS);
+            break;
+        case 9:
+            hapusProdukDariSupplier(LS, LP);
             break;
         case 0:
             cout << "\nTerima kasih atas waktu Anda.\nMenutup program...\n";

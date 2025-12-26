@@ -119,7 +119,17 @@ void hubungkanSupplierProduk(ListSupplier &LS, ListProduk &LP) {
             cout << "[ERROR] Supplier '" << namaSupplier << "' tidak ditemukan\n";
         }
         else {
-            connectSuptoProd(sp, pr);
+            adrRelasi duplikat = sp->firstRelasi;
+            while(duplikat != nullptr
+                  && duplikat->toProduk->infoP.namaProduk != pr->infoP.namaProduk) {
+                duplikat = duplikat->next;
+            }
+            if (duplikat != nullptr) {
+                cout << "[ERROR] Produk sudah terdaftar di supplier." << endl;
+            }
+            else {
+                connectSuptoProd(sp, pr);
+            }
         }
     }
 }
@@ -177,7 +187,7 @@ void tampilkanSupplierTerbanyak(ListSupplier &LS) {
     }
     else {
         jumlah = countProductsBySupplier(top);
-        cout << "\nTop Supplier: " << top->infoS.namaSupplier << endl;
+        cout << "\nTOP SUPPLIER: " << top->infoS.namaSupplier << endl;
         cout << "Menyediakan " << jumlah << " produk.\n";
         cout << "Lokasi: " << top->infoS.lokasi << endl;
     }

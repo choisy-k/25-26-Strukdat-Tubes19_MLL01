@@ -83,7 +83,7 @@ void showAllData(ListSupplier L) {
         return;
     }
 
-    cout << "\n------- DAFTAR SUPPLIER -------" << endl << endl;
+    cout << "\n------- DAFTAR SUPPLIER DAN PRODUK -------" << endl << endl;
     while(s != nullptr) {
         int counter = 0;
 
@@ -93,7 +93,7 @@ void showAllData(ListSupplier L) {
 
         adrRelasi r = s->firstRelasi;
         if(r == nullptr) {
-            cout << "  (Tidak ada produk)" << endl;
+            cout << "  ---N/A---" << endl;
         } else {
             while(r != nullptr) {
                 counter++;

@@ -95,15 +95,17 @@ adrSupplier findTopSupplier(ListSupplier L) {
 
 void printSupplierInfo(ListSupplier L) {
     adrSupplier p = L.first;
+
     if(isEmptySupplier(L)) {
         cout << "Supplier kosong." << endl;
     }
     else {
-        cout << "List Supplier: " << endl << endl;
+        cout << "------- DAFTAR SUPPLIER -------" << endl;
+        int counter = 0;
         while (p != nullptr) {
-            cout << "Nama   : " << p->infoS.namaSupplier << endl;
-            cout << "Lokasi : " << p->infoS.lokasi << endl;
-            cout << endl;
+            counter++;
+            cout << counter << ". " << p->infoS.namaSupplier
+                 << " - " << p->infoS.lokasi << endl;
             p = p->next;
         }
     }
