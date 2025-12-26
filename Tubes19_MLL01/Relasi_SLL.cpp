@@ -21,7 +21,7 @@ void connectSuptoProd(adrSupplier s, adrProduk p){
             r->next = s->firstRelasi;
             s->firstRelasi = r;
         }
-        cout << "\n[SUCCESS] Produk " << p->infoP.namaProduk << " ditambahkan ke Supplier " << s->infoS.namaSupplier << "." << endl;
+        //cout << "\n[SUCCESS] Produk " << p->infoP.namaProduk << " ditambahkan ke Supplier " << s->infoS.namaSupplier << "." << endl;
     }
 }
 

@@ -48,7 +48,7 @@ int main() {
     createSupplierList(LS);
 
     dummyData(LP, LS);
-    cout << "\nDUMMY DATA SUCCESSFULLY INSERTED.\n" << endl;
+    //cout << "\nDUMMY DATA SUCCESSFULLY INSERTED.\n" << endl;
 
     int pilihan;
 

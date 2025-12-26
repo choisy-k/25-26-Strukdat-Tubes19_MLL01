@@ -129,6 +129,8 @@ void hubungkanSupplierProduk(ListSupplier &LS, ListProduk &LP) {
             }
             else {
                 connectSuptoProd(sp, pr);
+                cout << "\n[SUCCESS] Produk " << pr->infoP.namaProduk
+                     << " ditambahkan ke Supplier " << sp->infoS.namaSupplier << "." << endl;
             }
         }
     }
