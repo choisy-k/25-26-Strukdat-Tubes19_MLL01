@@ -62,7 +62,7 @@ void deleteProdukfromSupplier(adrSupplier s, adrProduk p){
             }
         }
     }
-    cout << "Produk berhasil dihapus dari supplier." << endl;
+    cout << "[SUCCESS] Produk berhasil dihapus dari supplier." << endl;
 }
 
 int countProductsBySupplier(adrSupplier s) {

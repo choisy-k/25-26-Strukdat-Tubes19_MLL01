@@ -17,7 +17,8 @@ void tambahSupplier(ListSupplier &LS) {
     string nama, lokasi;
     cout << "\n--- Tambah Supplier ---\n";
     cout << "Nama Supplier: ";
-    cin >> nama;
+    cin.ignore(10000, '\n');
+    getline(cin, nama);
     nama = toUpper(nama);
 
     adrSupplier sup = searchSupplier(LS, nama);
@@ -26,7 +27,7 @@ void tambahSupplier(ListSupplier &LS) {
     }
     else {
         cout << "Lokasi: ";
-        cin >> lokasi;
+        getline(cin, lokasi);
 
         adrSupplier sp = allocateSupplier(nama, lokasi);
         insertSupplierFirst(LS, sp);
@@ -40,7 +41,8 @@ void tambahProduk(ListProduk &LP, ListSupplier &LS) {
 
     cout << "\n--- Tambah Produk ---\n";
     cout << "Nama Produk: ";
-    cin >> nama;
+    cin.ignore(10000, '\n');
+    getline(cin, nama);
     nama = toUpper(nama);
 
     adrProduk prod = searchProduk(LP, nama);
@@ -49,7 +51,7 @@ void tambahProduk(ListProduk &LP, ListSupplier &LS) {
     }
     else {
         cout << "Kategori: ";
-        cin >> kategori;
+        getline(cin, kategori);
         cout << "Harga: ";
         cin >> harga;
         cout << "Minimum Order Quantity (MOQ): ";
@@ -60,12 +62,12 @@ void tambahProduk(ListProduk &LP, ListSupplier &LS) {
         cout << "[SUCCESS] Produk berhasil ditambahkan!\n\n";
 
         cout << "Daftarkan produk ke supplier: ";
-        cin >> namaSup;
+        cin.ignore(10000, '\n');
+        getline(cin, namaSup);
         namaSup = toUpper(namaSup);
         adrSupplier sp = searchSupplier(LS, namaSup);
         if(sp != nullptr) {
             connectSuptoProd(sp, pr);
-            cout << "\n[SUCCESS] Produk telah didaftarkan ke supplier!\n";
         } else {
             cout << "[ERROR] Supplier '" << namaSup << "' tidak ditemukan.\n";
         }
@@ -77,7 +79,8 @@ void cariSupplier(ListSupplier &LS) {
     int jumlah;
     cout << "\n--- Cari Supplier ---\n";
     cout << "Nama Supplier: ";
-    cin >> nama;
+    cin.ignore(10000, '\n');
+    getline(cin, nama);
     nama = toUpper(nama);
 
     adrSupplier sp = searchSupplier(LS, nama);
@@ -98,7 +101,8 @@ void hubungkanSupplierProduk(ListSupplier &LS, ListProduk &LP) {
 
     cout << "\n--- Tambahkan Produk ke Supplier ---\n";
     cout << "Nama Produk: ";
-    cin >> namaProduk;
+    cin.ignore(10000, '\n');
+    getline(cin, namaProduk);
     namaProduk = toUpper(namaProduk);
     adrProduk pr = searchProduk(LP, namaProduk);
 
@@ -107,7 +111,7 @@ void hubungkanSupplierProduk(ListSupplier &LS, ListProduk &LP) {
     }
     else {
         cout << "Nama Supplier: ";
-        cin >> namaSupplier;
+        getline(cin, namaSupplier);
         namaSupplier = toUpper(namaSupplier);
         adrSupplier sp = searchSupplier(LS, namaSupplier);
 
@@ -124,7 +128,8 @@ void hapusSupplier(ListSupplier &LS) {
     string nama;
     cout << "\n--- Hapus Supplier ---\n";
     cout << "Nama Supplier yang akan dihapus: ";
-    cin >> nama;
+    cin.ignore(10000, '\n');
+    getline(cin, nama);
     nama = toUpper(nama);
 
     adrSupplier sp = searchSupplier(LS, nama);
@@ -140,7 +145,8 @@ void hapusProdukDariSupplier(ListSupplier &LS, ListProduk &LP) {
 
     cout << "\n--- Hapus Produk dari Supplier ---\n";
     cout << "Nama Supplier: ";
-    cin >> namaSupplier;
+    cin.ignore(10000, '\n');
+    getline(cin, namaSupplier);
     namaSupplier = toUpper(namaSupplier);
     adrSupplier sp = searchSupplier(LS, namaSupplier);
 
@@ -149,7 +155,7 @@ void hapusProdukDariSupplier(ListSupplier &LS, ListProduk &LP) {
     }
     else {
         cout << "Nama Produk yang akan dihapus: ";
-        cin >> namaProduk;
+        getline(cin, namaProduk);
         namaProduk = toUpper(namaProduk);
         adrProduk pr = searchProduk(LP, namaProduk);
 

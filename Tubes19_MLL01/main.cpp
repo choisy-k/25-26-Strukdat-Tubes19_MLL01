@@ -118,8 +118,8 @@ int main() {
 
         // mencegah menu muncul sampai user menekan Enter.
         cout << "\nTekan Enter untuk melanjutkan.";
-        cin.get();
         cin.ignore(10000, '\n');
+        cin.get();
 
     } while(pilihan != 0);
 
